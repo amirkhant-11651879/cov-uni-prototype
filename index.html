@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Dashboard - Coventry University</title>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Link to your CSS file -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Chart.js with defer attribute -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <!-- Coventry University Logo & Title -->
+      <img src="coventry-logo.png" alt="Coventry Logo" class="cu-logo" />
+      <h1 class="site-title">Coventry University Student Portal</h1>
+    </div>
+    <div class="header-right">
+      <!-- Notifications pop-up -->
+      <a 
+        class="popup-link notifications-link" 
+        style="color: #fff;"
+        data-modal-title="Notifications"
+        data-modal-content="
+<div class='notifications-popup'>
+  <div class='notifications-header'>
+    <h4><i class='fas fa-bell'></i> Notifications <span class='notification-count'>5</span></h4>
+  </div>
+  <ul class='notifications-list'>
+    <li class='notification-item unread'>
+      <div class='notification-icon'>
+        <i class='fas fa-graduation-cap'></i>
+      </div>
+      <div class='notification-content'>
+        <h5 class='notification-title'>6001CEM Grade Posted</h5>
+        <p class='notification-message'>Your coursework has been marked. Click to view your grade and feedback.</p>
+        <span class='notification-time'>Just now</span>
+        <div class='notification-actions'>
+          <button class='notification-btn primary'><i class='fas fa-eye'></i> View Grade</button>
+        </div>
+      </div>
+    </li>
+    <li class='notification-item unread'>
+      <div class='notification-icon'>
+        <i class='fas fa-calendar-alt'></i>
+      </div>
+      <div class='notification-content'>
+        <h5 class='notification-title'>Exam Registration Open</h5>
+        <p class='notification-message'>April 2025 exam registration is now open. Register before the deadline.</p>
+        <span class='notification-time'>2 hours ago</span>
+        <div class='notification-actions'>
+          <button class='notification-btn primary'><i class='fas fa-edit'></i> Register Now</button>
+        </div>
+      </div>
+    </li>
+    <li class='notification-item unread'>
+      <div class='notification-icon'>
+        <i class='fas fa-book'></i>
+      </div>
+      <div class='notification-content'>
+        <h5 class='notification-title'>Library Hours Extended</h5>
+        <p class='notification-message'>Library will remain open until 10pm during revision week.</p>
+        <span class='notification-time'>5 hours ago</span>
+      </div>
+    </li>
+    <li class='notification-item unread'>
+      <div class='notification-icon'>
+        <i class='fas fa-clock'></i>
+      </div>
+      <div class='notification-content'>
+        <h5 class='notification-title'>Deadline Reminder</h5>
+        <p class='notification-message'>6042CEM Group Report due in 3 days. Don't forget to submit!</p>
+        <span class='notification-time'>Yesterday</span>
+        <div class='notification-actions'>
+          <button class='notification-btn'><i class='fas fa-check'></i> Mark Done</button>
+          <button class='notification-btn primary'><i class='fas fa-upload'></i> Submit Now</button>
+        </div>
+      </div>
+    </li>
+    <li class='notification-item unread'>
+      <div class='notification-icon'>
+        <i class='fas fa-users'></i>
+      </div>
+      <div class='notification-content'>
+        <h5 class='notification-title'>Group Assignment Update</h5>
+        <p class='notification-message'>New message in your group chat for 6042CEM project.</p>
+        <span class='notification-time'>2 days ago</span>
+        <div class='notification-actions'>
+          <button class='notification-btn primary'><i class='fas fa-comments'></i> View Chat</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class='notifications-footer'>
+    <a class='mark-all-read'>Mark all as read</a>
+  </div>
+</div>
+"
+      >
+        Notifications
+      </a>
+      <!-- Sign Out button -->
+      <button class="signout-btn" aria-label="Sign out of your account">Sign Out</button>
+    </div>
+  </header>
+
+  <!-- SIDEBAR NAV -->
+  <nav>
+    <div class="nav-title">Main Menu</div>
+    <ul class="nav-list">
+      <li>
+        <a class="view-results-btn">Online Results</a>
+      </li>
+      <li>
+        <a class="popup-link"
+           data-modal-title="Personal Information"
+           data-modal-content="
+<div class='important-box'>
+  <strong>Personal Information:</strong>
+  <p>Update phone, address, or emergency contacts under GDPR compliance.</p>
+  <button class='action-button'>Open Personal Info</button>
+</div>
+">
+          Personal Information
+        </a>
+      </li>
+      <li>
+        <a class="popup-link"
+           data-modal-title="Module Registration"
+           data-modal-content="
+<div class='module-registration-container'>
+  <div class='registration-status'>
+    <i class='fas fa-calendar-times'></i>
+    <h3>Registration Period Closed</h3>
+    <p>The module registration window for 2024/25 is now closed.</p>
+  </div>
+
+  <div class='registration-info'>
+    <div class='info-section'>
+      <h4><i class='fas fa-info-circle'></i> Current Status</h4>
+      <ul>
+        <li>Academic Year: 2024/25</li>
+        <li>Stage: 3 (Final Year)</li>
+        <li>Credits Registered: 90/90</li>
+      </ul>
+    </div>
+
+    <div class='info-section'>
+      <h4><i class='fas fa-book'></i> Registered Modules</h4>
+      <ul>
+        <li>6001CEM - Individual Project (20 credits)</li>
+        <li>6042CEM - Management Information Systems (15 credits)</li>
+        <li>6068CEM - Project Management (15 credits)</li>
+      </ul>
+    </div>
+
+    <div class='info-section'>
+      <h4><i class='fas fa-question-circle'></i> Need Help?</h4>
+      <p>For registration queries or changes, please contact:</p>
+      <div class='contact-info'>
+        <p><i class='fas fa-envelope'></i> <a href='mailto:eec.registry@coventry.ac.uk'>eec.registry@coventry.ac.uk</a></p>
+        <p><i class='fas fa-phone'></i> +44 (0)24 7765 7688</p>
+      </div>
+    </div>
+  </div>
+
+  <div class='registration-footer'>
+    <p class='note'><i class='fas fa-exclamation-circle'></i> Changes to module registration after the deadline require approval from your Course Director.</p>
+  </div>
+</div>
+">
+          Module Registration
+        </a>
+      </li>
+      <li>
+        <a class="popup-link"
+           data-modal-title="Coursework & Assessments"
+           data-modal-content="
+<div class='coursework-container'>
+  <div class='submission-section'>
+    <div class='aula-card'>
+      <img src='aula-logo.svg' alt='Aula Logo' class='aula-logo'>
+      <div class='aula-content'>
+        <h3>Welcome to Aula</h3>
+        <p>Your gateway to academic excellence. Submit coursework, receive feedback, and track your progress through our official learning platform.</p>
+        <button class='aula-btn'>
+          <i class='fas fa-external-link-alt'></i>
+          Launch Aula Platform
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class='coursework-footer'>
+    <div class='help-note'>
+      <i class='fas fa-question-circle'></i>
+      <p>Need help with submissions? Contact your module leader or visit the <a href='#'>Student Portal Help Center</a></p>
+    </div>
+  </div>
+</div>
+">
+          Coursework & Assessments
+        </a>
+      </li>
+      <li>
+        <!-- Support Services main modal -->
+        <a class="open-services-modal">Support Services</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <!-- Welcome Banner with Time-based Greeting -->
+    <div class="welcome-banner card">
+        <div class="greeting-section">
+            <h2 id="timeBasedGreeting">Good Morning, Alex!</h2>
+            <p id="currentDate">Wednesday, February 14, 2024</p>
+        </div>
+        <div class="quick-stats">
+            <div class="stat-item">
+                <i class="fas fa-calendar-check"></i>
+                <span>2</span>
+                <p>Upcoming Deadlines</p>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-bell"></i>
+                <span>5</span>
+                <p>New Alerts</p>
+            </div>
+            <div class="stat-item" style="cursor: pointer;" onclick="document.querySelector('.view-results-btn').click()">
+                <i class="fas fa-graduation-cap"></i>
+                <span>80%</span>
+                <p>Overall Progress</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Announcements -->
+    <div class="announcements-ticker">
+        <div class="ticker-content" id="announcementTicker">
+            <span class="announcement-item">🎓 Graduation Registration opens next week</span>
+            <span class="announcement-item">📚 Library extended hours start Monday</span>
+            <span class="announcement-item">🏆 Student Awards nominations now open</span>
+        </div>
+    </div>
+
+    <!-- Dashboard Grid -->
+    <div class="dashboard-grid">
+        <!-- Deadlines Widget -->
+        <div class="dashboard-widget card">
+            <div class="widget-header">
+                <h3>Upcoming Deadlines</h3>
+            </div>
+            <ul class="deadline-list" id="deadlinesList">
+                <li class="deadline-item urgent">
+                    <div class="deadline-info">
+                        <h4>6001CEM - Individual Project</h4>
+                        <p>Due: Feb 15, 2025</p>
+                        <button class="complete-btn">
+                            <i class="fas fa-check"></i>
+                            Mark Complete
+                        </button>
+                    </div>
+                    <div class="deadline-progress">
+                        <div class="progress-ring">
+                            <span></span>
+                            <small>days left</small>
+                        </div>
+                    </div>
+                </li>
+                <li class="deadline-item">
+                    <div class="deadline-info">
+                        <h4>6042CEM - Group Report</h4>
+                        <p>Due: Mar 10, 2025</p>
+                        <button class="complete-btn">
+                            <i class="fas fa-check"></i>
+                            Mark Complete
+                        </button>
+                    </div>
+                    <div class="deadline-progress">
+                        <div class="progress-ring">
+                            <span></span>
+                            <small>days left</small>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Attendance Widget -->
+        <div class="dashboard-widget card">
+            <div class="widget-header">
+                <h3>Attendance Overview</h3>
+                <button class="view-attendance-btn" aria-label="View full attendance record" title="View detailed attendance history">
+                    <i class="fas fa-list" aria-hidden="true"></i>
+                    View Full
+                </button>
+            </div>
+            <div class="attendance-overview">
+                <div class="attendance-chart-container">
+                    <canvas id="attendanceOverviewChart"></canvas>
+                </div>
+                <div class="attendance-stats">
+                    <div class="stat">
+                        <span class="stat-value">85%</span>
+                        <span class="stat-label">Semester</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">88%</span>
+                        <span class="stat-label">Stage</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">87%</span>
+                        <span class="stat-label">Overall</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grade Summary Widget -->
+        <div class="dashboard-widget card">
+            <div class="widget-header">
+                <h3>Recent Grades</h3>
+                <button class="view-results-btn" title="View Full Results">
+                    <i class="fas fa-list"></i>
+                    View Full
+                </button>
+            </div>
+            <div class="grades-summary">
+                <table class="grades-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Grade</th>
+                            <th>Credits</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Advanced Cloud Computing</td>
+                            <td>76%</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>Add+Vantage A303</td>
+                            <td>85%</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>Software Testing</td>
+                            <td>70%</td>
+                            <td>15</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="grade-average">
+                    <div class="average-info">
+                        <div class="average-circle">77%</div>
+                        <div class="classification">
+                            <span class="class-label">First Class Honours</span>
+                            <span class="class-range">(70-100%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Timetable Section -->
+    <div class="card timetable-section">
+        <div class="section-header">
+            <h3>
+                <i class="fas fa-calendar-alt"></i>
+                Weekly Timetable
+            </h3>
+            <div class="timetable-actions">
+                <button class="action-btn" id="prevWeekBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <span id="currentWeekDisplay">Week 6 (12-16 Feb)</span>
+                <button class="action-btn" id="nextWeekBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="timetable-options">
+                    <button class="export-btn" aria-label="Export calendar to iCal format" title="Download calendar as .ics file">
+                        <i class="fas fa-download" aria-hidden="true"></i>
+                        Export
+                    </button>
+                    <button class="notify-btn" id="notifyAbsenceBtn" aria-label="Report absence" title="Report your absence for a class">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                        Report Absence
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="timetable-container">
+            <div class="timetable-grid" id="timetableGrid">
+                <!-- Time slots will be dynamically populated -->
+            </div>
+            <div class="room-updates" id="roomUpdates">
+                <div class="update-badge">
+                    <i class="fas fa-exclamation-circle"></i>
+                    Room Change Alert
+                </div>
+                <p>6042CEM lecture has moved from EC2-14 to EC3-12</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Document Management Section -->
+    <div class="document-section card">
+      <div class="widget-header">
+        <h3><i class="fas fa-file-alt"></i> Document Requests</h3>
+        <div class="document-filters">
+          <select class="filter-select">
+            <option>All Documents</option>
+          </select>
+        </div>
+      </div>
+      <div class="document-grid">
+        <div class="quick-request-cards">
+          <div class="request-card">
+            <i class="fas fa-user-graduate"></i>
+            <h4>Enrollment Verification</h4>
+            <p>Official verification of your current enrollment status</p>
+            <button class="request-btn" data-type="enrollment">+ Generate Now</button>
+          </div>
+          <div class="request-card">
+            <i class="fas fa-building"></i>
+            <h4>Council Tax Letter</h4>
+            <p>Letter confirming your student status for council tax exemption</p>
+            <button class="request-btn" data-type="council">+ Generate Now</button>
+          </div>
+          <div class="request-card">
+            <i class="fas fa-scroll"></i>
+            <h4>Academic Transcript</h4>
+            <p>Official record of your academic achievements and grades</p>
+            <button class="request-btn" data-type="transcript">+ Generate Now</button>
+          </div>
+          <div class="request-card">
+            <i class="fas fa-plus-circle"></i>
+            <h4>Custom Letter</h4>
+            <p>Request a custom letter for specific purposes</p>
+            <button class="request-btn" data-type="custom">+ Generate Now</button>
+          </div>
+        </div>
+        <div class="recent-requests">
+          <h4>Recent Requests</h4>
+          <div class="request-list">
+            <div class="request-item">
+              <div class="request-info">
+                <h5>Enrollment Verification</h5>
+                <p>Generated: Feb 12, 2024</p>
+              </div>
+              <div class="request-status">
+                <span class="ready-status">Ready</span>
+                <button class="download-btn">
+                  <i class="fas fa-download"></i>
+                  Download
+                </button>
+              </div>
+            </div>
+            <div class="request-item">
+              <div class="request-info">
+                <h5>Council Tax Letter</h5>
+                <p>Completed: Feb 10, 2024</p>
+              </div>
+              <div class="request-status">
+                <span class="ready-status">Ready</span>
+                <button class="download-btn">
+                  <i class="fas fa-download"></i>
+                  Download
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Absence Report Modal -->
+    <div id="absenceModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-header">Report Absence</div>
+            <div class="modal-body">
+                <form id="absenceForm">
+                    <div class="form-group">
+                        <label for="absenceDate">Date:</label>
+                        <input type="date" id="absenceDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="absenceClass">Select Class:</label>
+                        <select id="absenceClass" required>
+                            <option value="">Choose a class...</option>
+                            <option value="6042CEM">6042CEM - 09:00 AM</option>
+                            <option value="6001CEM">6001CEM - 02:00 PM</option>
+                            <option value="6080CEM">6080CEM - 11:00 AM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="absenceReason">Reason:</label>
+                        <select id="absenceReason" required>
+                            <option value="">Select reason...</option>
+                            <option value="illness">Illness</option>
+                            <option value="appointment">Medical Appointment</option>
+                            <option value="emergency">Family Emergency</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="otherReasonGroup" style="display: none;">
+                        <label for="otherReason">Please specify:</label>
+                        <textarea id="otherReason" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="absenceEvidence">Supporting Evidence (optional):</label>
+                        <input type="file" id="absenceEvidence">
+                        <small>Accepted formats: PDF, JPG, PNG (max 5MB)</small>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit" class="submit-btn">Submit</button>
+                        <button type="button" class="cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Document Request Modal -->
+    <div id="documentRequestModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-header">Request New Letter</div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>To:</label>
+                        <select required>
+                            <option value="">Select recipient...</option>
+                            <option value="general">To Whom It May Concern</option>
+                            <option value="landlord">To the Landlord/Property Manager</option>
+                            <option value="employer">To the Employer</option>
+                            <option value="custom">Other (specify below)</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="customRecipientGroup" style="display: none;">
+                        <label>Custom Recipient:</label>
+                        <input type="text" placeholder="Enter recipient name or title">
+                    </div>
+                    <div class="form-group">
+                        <label>Additional Details:</label>
+                        <textarea rows="4" placeholder="Please include any specific requirements or information needed in the letter."></textarea>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit" class="submit-btn">Generate Letter</button>
+                        <button type="button" class="cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ATTENDANCE DETAILS MODAL -->
+    <div id="attendanceModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-header">
+                <h3>Full Attendance Record - Academic Year 2024/25</h3>
+            </div>
+            <div class="modal-body">
+                <div class="attendance-details">
+                    <div class="attendance-filters">
+                        <select id="monthSelector" class="filter-select">
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    <div class="attendance-table-container">
+                        <table class="attendance-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Module</th>
+                                    <th>Class</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendanceTableBody">
+                                <!-- Will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="attendance-summary">
+                        <div class="summary-stats">
+                            <div class="stat">
+                                <span class="stat-label">Total Classes</span>
+                                <span class="stat-value" id="totalClasses">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Attended</span>
+                                <span class="stat-value" id="attendedClasses">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Attendance Rate</span>
+                                <span class="stat-value" id="attendanceRate">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <!-- Quick Links Section -->
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-graduation-cap"></i> Academic Calendar</a></li>
+          <li><a href="#"><i class="fas fa-book"></i> Library Resources</a></li>
+          <li><a href="#"><i class="fas fa-laptop"></i> IT Services</a></li>
+          <li><a href="#"><i class="fas fa-users"></i> Student Union</a></li>
+        </ul>
+      </div>
+
+      <!-- Support Section -->
+      <div class="footer-section">
+        <h3>Support</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-question-circle"></i> Help & FAQ</a></li>
+          <li><a href="#"><i class="fas fa-hands-helping"></i> Student Support</a></li>
+          <li><a href="#"><i class="fas fa-shield-alt"></i> Wellbeing Services</a></li>
+          <li><a href="#"><i class="fas fa-universal-access"></i> Accessibility</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <div class="footer-contact">
+          <p><i class="fas fa-phone"></i> +44 (0)24 7765 7688</p>
+          <p><i class="fas fa-envelope"></i> students@coventry.ac.uk</p>
+          <p><i class="fas fa-map-marker-alt"></i> Priory Street, Coventry, CV1 5FB</p>
+        </div>
+        <div class="footer-social">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <p>&copy; 2025 Coventry University. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+    </div>
+  </footer>
+
+  <!-- A hidden 'success banner' element for real-time feedback -->
+  <div id="successBanner" class="success-banner" style="display: none;"></div>
+
+  <!-- GENERIC MODAL FOR INFO -->
+  <div id="modal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Close pop-up" role="button" tabindex="0">&times;</span>
+      <div class="modal-header" id="modal-title"></div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- EDIT PERSONAL INFO MODAL -->
+  <div id="editPersonalModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Close pop-up" role="button" tabindex="0">&times;</span>
+      <div class="modal-header">Edit Personal Information</div>
+      <div class="modal-body">
+        <form>
+          <label>Name:</label><br/>
+          <input type="text" value="Alex Johnson"><br/><br/>
+
+          <label>Phone Number:</label><br/>
+          <input type="text" value="07555 123456"><br/><br/>
+
+          <label>Term Address:</label><br/>
+          <input type="text" value="999 Generic St, Coventry, CV1 1ZZ"><br/><br/>
+
+          <p style="font-size: 0.9em; color: gray;">
+            *Your data is protected under University policies and GDPR.
+          </p>
+          <div class="form-buttons">
+            <button type="button" class="save-btn">Save</button>
+            <button type="button" class="cancel-btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT EMERGENCY CONTACT MODAL -->
+  <div id="editEmergencyModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Close pop-up" role="button" tabindex="0">&times;</span>
+      <div class="modal-header">Edit Emergency Contacts</div>
+      <div class="modal-body">
+        <form>
+          <label>Primary Contact Name:</label><br/>
+          <input type="text" value="Sarah Johnson"><br/><br/>
+
+          <label>Primary Relationship:</label><br/>
+          <input type="text" value="Parent"><br/><br/>
+
+          <label>Primary Contact Phone:</label><br/>
+          <input type="text" value="07900 111222"><br/><br/>
+
+          <hr style="margin: 20px 0;"/>
+
+          <label>Secondary Contact Name:</label><br/>
+          <input type="text" value="Tom Johnson"><br/><br/>
+
+          <label>Secondary Relationship:</label><br/>
+          <input type="text" value="Sibling"><br/><br/>
+
+          <label>Secondary Contact Phone:</label><br/>
+          <input type="text" value="07900 222333"><br/><br/>
+
+          <p style="font-size: 0.9em; color: gray;">
+            *Emergency contacts are informed their data is stored for urgent situations only.
+          </p>
+          <div class="form-buttons">
+            <button type="button" class="save-btn">Save</button>
+            <button type="button" class="cancel-btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPORT SERVICES MODAL -->
+  <div id="servicesModal" class="modal-overlay">
+    <div class="modal-content support-services-modal">
+      <span class="close-button" aria-label="Close pop-up" role="button">&times;</span>
+      <div class="modal-header">
+        <h3><i class="fas fa-hands-helping"></i> Student Support Services</h3>
+        <p>Access a range of support services to help you succeed in your studies</p>
+      </div>
+      <div class="modal-body">
+        <div class="services-grid">
+          <!-- Wellbeing Support -->
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <h4>Wellbeing Support</h4>
+            <p>Access counseling, mental health support, and disability services.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> 24/7 Support Line</li>
+              <li><i class="fas fa-check"></i> Personal Counseling</li>
+              <li><i class="fas fa-check"></i> Disability Assistance</li>
+            </ul>
+            <button class="services-btn" data-service="wellbeing" aria-label="Access Wellbeing Support Services">
+              <i class="fas fa-arrow-right" aria-hidden="true"></i> Access Support
+            </button>
+          </div>
+
+          <!-- Academic Support -->
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h4>Academic Support</h4>
+            <p>Get help with your studies, assignments, and academic skills.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Study Skills Workshops</li>
+              <li><i class="fas fa-check"></i> Writing Support</li>
+              <li><i class="fas fa-check"></i> Math & Stats Help</li>
+            </ul>
+            <button class="services-btn" data-service="academic">
+              <i class="fas fa-arrow-right"></i> Get Help
+            </button>
+          </div>
+
+          <!-- Career Services -->
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <h4>Career Services</h4>
+            <p>Prepare for your future career with expert guidance and resources.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> CV Reviews</li>
+              <li><i class="fas fa-check"></i> Interview Practice</li>
+              <li><i class="fas fa-check"></i> Job Search Support</li>
+            </ul>
+            <button class="services-btn" data-service="career">
+              <i class="fas fa-arrow-right"></i> Explore Careers
+            </button>
+          </div>
+
+          <!-- Financial Support -->
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-pound-sign"></i>
+            </div>
+            <h4>Financial Support</h4>
+            <p>Get advice on funding, scholarships, and financial management.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Hardship Fund</li>
+              <li><i class="fas fa-check"></i> Scholarship Advice</li>
+              <li><i class="fas fa-check"></i> Budget Planning</li>
+            </ul>
+            <button class="services-btn" data-service="financial">
+              <i class="fas fa-arrow-right"></i> Get Advice
+            </button>
+          </div>
+
+          <!-- Housing Support -->
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-home"></i>
+            </div>
+            <h4>Housing Support</h4>
+            <p>Find help with accommodation and housing-related issues.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Accommodation Search</li>
+              <li><i class="fas fa-check"></i> Tenancy Advice</li>
+              <li><i class="fas fa-check"></i> Emergency Housing</li>
+            </ul>
+            <button class="services-btn" data-service="housing">
+              <i class="fas fa-arrow-right"></i> Find Housing
+            </button>
+          </div>
+
+          <!-- International Support -->
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <h4>International Support</h4>
+            <p>Dedicated support for international students.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Visa Guidance</li>
+              <li><i class="fas fa-check"></i> Cultural Support</li>
+              <li><i class="fas fa-check"></i> English Language Help</li>
+            </ul>
+            <button class="services-btn" data-service="international">
+              <i class="fas fa-arrow-right"></i> Get Support
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS MODAL with Semesters, Credits, & Add+Vantage -->
+  <div id="resultsModal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Close pop-up" role="button">&times;</span>
+      <div class="modal-header">Online Results</div>
+      <div class="modal-body">
+        <div class="results-container">
+          <div class="results-tabs">
+            <div class="results-tab active" data-target="stage1Content">Stage 1</div>
+            <div class="results-tab" data-target="stage2Content">Stage 2</div>
+            <div class="results-tab" data-target="stage3Content">Stage 3</div>
+          </div>
+          <!-- STAGE 1 CONTENT -->
+          <div id="stage1Content" class="results-content active">
+            <h4>Stage 1 - Semester 1</h4>
+            <table class="results-table">
+              <tr><th>Module</th><th>Mark</th><th>Credits</th><th>Status</th></tr>
+              <tr class="passed"><td>Fundamentals of IT</td><td>75%</td><td>15</td><td>Pass</td></tr>
+              <tr class="passed"><td>Intro to Web Dev</td><td>72%</td><td>15</td><td>Pass</td></tr>
+              <tr class="passed"><td>Add+Vantage A101: Presentation Skills</td><td>80%</td><td>10</td><td>Pass</td></tr>
+            </table>
+            <div class="semester-classification">
+              <p><strong>Semester 1 Credits Completed:</strong> 40</p>
+            </div>
+
+            <h4>Stage 1 - Semester 2</h4>
+            <table class="results-table">
+              <tr><th>Module</th><th>Mark</th><th>Credits</th><th>Status</th></tr>
+              <tr class="passed"><td>Software Design</td><td>78%</td><td>15</td><td>Pass</td></tr>
+              <tr class="passed"><td>Networking Basics</td><td>74%</td><td>15</td><td>Pass</td></tr>
+              <tr class="passed"><td>Professional Skills</td><td>71%</td><td>10</td><td>Pass</td></tr>
+            </table>
+            <div class="semester-classification">
+              <p><strong>Semester 2 Credits Completed:</strong> 40</p>
+            </div>
+            <div class="stage-classification">
+              <p><strong>Stage 1 Progress:</strong> 80/80 Credits Completed</p>
+              <p><strong>Stage Average:</strong> 75% (First Class Honours)</p>
+            </div>
+          </div>
+          <!-- STAGE 2 CONTENT -->
+          <div id="stage2Content" class="results-content">
+            <h4>Stage 2 - Semester 1</h4>
+            <table class="results-table">
+              <tr><th>Module</th><th>Mark</th><th>Credits</th><th>Status</th></tr>
+              <tr class="passed"><td>Data Structures & Algorithms</td><td>72%</td><td>15</td><td>Pass</td></tr>
+              <tr class="passed"><td>Database Systems</td><td>77%</td><td>15</td><td>Pass</td></tr>
+              <tr class="passed"><td>Add+Vantage A202: Entrepreneurship</td><td>82%</td><td>10</td><td>Pass</td></tr>
+            </table>
+            <div class="semester-classification">
+              <p><strong>Semester 1 Credits Completed:</strong> 40</p>
+            </div>
+
+            <h4>Stage 2 - Semester 2</h4>
+            <table class="results-table">
+              <tr><th>Module</th><th>Mark</th><th>Credits</th><th>Status</th></tr>
+              <tr class="passed"><td>Project Management</td><td>75%</td><td>15</td><td>Pass</td></tr>
+              <tr class="passed"><td>Operating Systems</td><td>79%</td><td>15</td><td>Pass</td></tr>
+              <tr class="passed"><td>Data Analytics</td><td>73%</td><td>10</td><td>Pass</td></tr>
+            </table>
+            <div class="semester-classification">
+              <p><strong>Semester 2 Credits Completed:</strong> 40</p>
+            </div>
+            <div class="stage-classification">
+              <p><strong>Stage 2 Progress:</strong> 80/80 Credits Completed</p>
+              <p><strong>Stage Average:</strong> 76% (First Class Honours)</p>
+            </div>
+          </div>
+          <!-- STAGE 3 CONTENT -->
+          <div id="stage3Content" class="results-content">
+            <h4>Stage 3 - Semester 1 (Completed)</h4>
+            <table class="results-table">
+              <tr><th>Module</th><th>Mark</th><th>Credits</th><th>Status</th></tr>
+              <tr class="passed"><td>Advanced Cloud Computing</td><td>76%</td><td>15</td><td>Pass</td></tr>
+              <tr class="passed"><td>Add+Vantage A303: Leadership</td><td>85%</td><td>10</td><td>Pass</td></tr>
+              <tr class="passed"><td>Software Testing</td><td>70%</td><td>15</td><td>Pass</td></tr>
+            </table>
+            <div class="semester-classification">
+              <p><strong>Semester 1 Credits Completed:</strong> 40</p>
+            </div>
+            
+            <h4>Stage 3 - Semester 2 (In Progress)</h4>
+            <table class="results-table">
+              <tr><th>Module</th><th>Credits</th><th>Status</th></tr>
+              <tr><td>6001CEM: Individual Project</td><td>20</td><td>Ongoing</td></tr>
+              <tr><td>6042CEM: Mgmt Info Systems</td><td>15</td><td>Ongoing</td></tr>
+              <tr><td>6068CEM: Project Management</td><td>15</td><td>Ongoing</td></tr>
+            </table>
+            <div class="stage-classification">
+              <p><strong>Stage 3 Progress:</strong> 40/90 Credits Completed</p>
+              <p><strong>Current Average:</strong> 77% (First Class Honours)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Link to your separate JS file at the end of body -->
+  <script src="script.js" defer></script>
+</body>
+</html>
