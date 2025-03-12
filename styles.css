@@ -24,9 +24,14 @@ body {
 
 /* Coventry logo style in the header */
 .cu-logo {
-  width: 120px; /* bigger for visibility */
-  height: auto;
+  width: 180px;
+  max-height: 80px; /* restrict logo height to fit within header */
   margin-right: 15px;
+  padding: 5px;
+  background-color: #fff;  /* adds contrast */
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  object-fit: contain;
 }
 
 /* Base link & button styles */
