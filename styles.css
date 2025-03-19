@@ -98,7 +98,7 @@ button.loading::after {
 }
 .signout-btn {
   background-color: #cc0000;
-  margin-left: 0;  /* removed large left margin */
+  margin-left: 20px;
 }
 .signout-btn:hover {
   background-color: #990000;
@@ -134,13 +134,12 @@ header {
 .header-left {
   display: flex;
   align-items: center;
-  position: relative; // added to set as containing block for absolute children
+  position: relative; /* added to set as containing block for absolute children*/
 }
 .header-right {
   display: flex;
   align-items: center;
-  margin-left: auto; /* added to push items to the right */
-  gap: 15px;       /* reduced gap for tighter alignment */
+  gap: 20px;
 }
 .site-title {
   margin: 0;
