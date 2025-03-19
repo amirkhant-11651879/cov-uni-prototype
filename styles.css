@@ -2468,6 +2468,8 @@ textarea:focus {
     flex-direction: column;
     padding: 10px;
     text-align: center;
+    height: auto; /* allow auto height on mobile */
+    padding: 15px; /* increased padding for stacked layout */
   }
   .header-left {
     display: flex;
@@ -2493,10 +2495,11 @@ textarea:focus {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    z-index: 10000; /* ensure the menu appears above header text */
   }
   /* Ensure header-right does not overflow */
   .header-right {
-    margin-top: 10px;
+    margin-top: 0; /* remove extra top margin */
     justify-content: center;
   }
   
@@ -2510,6 +2513,11 @@ textarea:focus {
     align-items: center;
     gap: 10px;
     margin-top: 15px;
+  }
+  .quick-stats .stat-item {
+    width: 100%;
+    max-width: 300px;
+    flex: 1 1 auto;
   }
   
   /* Timetable: reposition absence button */
