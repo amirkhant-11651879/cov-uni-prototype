@@ -99,6 +99,7 @@ button.loading::after {
 .signout-btn {
   background-color: #cc0000;
   margin-left: 20px;
+  min-width: 100px; /* Reduced sign out button width */
 }
 .signout-btn:hover {
   background-color: #990000;
@@ -139,7 +140,7 @@ header {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 0; /* override uniform gap */
 }
 .site-title {
   margin: 0;
@@ -2542,4 +2543,14 @@ textarea:focus {
   nav {
     width: 80%;
   }
+}
+
+.nav-toggle {
+  margin-right: 10px; /* reduced gap between nav-toggle and next element */
+  /* ...existing code... */
+}
+
+.popup-link.notifications-link {
+  margin-right: 15px; /* apply a slightly larger margin if needed */
+  /* ...existing code... */
 }
