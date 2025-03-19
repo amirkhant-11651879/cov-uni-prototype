@@ -578,6 +578,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize attendance record system
   initializeAttendanceRecord();
+  
+  // Add navigation toggle functionality for mobile
+  const navToggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('nav');
+  if(navToggle && nav) {
+    navToggle.addEventListener('click', function() {
+      nav.classList.toggle('active');
+    });
+  }
 });
 
 // Timetable initialization

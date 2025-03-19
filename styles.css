@@ -2460,3 +2460,79 @@ textarea:focus {
     animation: loadingSpinner 0.8s linear infinite;
     margin-right: 8px;
 }
+
+/* Mobile responsive adjustments */
+@media (max-width: 480px) {
+  /* Header: adjust layout and font sizes */
+  header {
+    flex-direction: column;
+    padding: 10px;
+    text-align: center;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+  }
+  .site-title {
+    font-size: 1rem;
+    margin: 0 10px;
+    white-space: normal;
+  }
+  /* Nav toggle button styling */
+  .nav-toggle {
+    display: inline-block;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  /* Ensure header-right does not overflow */
+  .header-right {
+    margin-top: 10px;
+    justify-content: center;
+  }
+  
+  /* Welcome banner: stack quick stats below greeting */
+  .welcome-banner {
+    flex-direction: column;
+    align-items: center;
+  }
+  .quick-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  /* Timetable: reposition absence button */
+  .timetable-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .timetable-options {
+    margin-left: 0;
+  }
+  
+  /* Side navigation: slide-in menu */
+  nav {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  nav.active {
+    transform: translateX(0);
+  }
+  
+  /* Optionally adjust nav width on mobile */
+  nav {
+    width: 80%;
+  }
+}
