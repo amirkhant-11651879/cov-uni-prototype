@@ -17,7 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding-top: 100px; /* Height of the header */
+  padding-top: 150px; /* Height of the header */
   padding-left: 220px; /* Width of the nav */
   position: relative;
 }
@@ -134,6 +134,7 @@ header {
 .header-left {
   display: flex;
   align-items: center;
+  position: relative; // added to set as containing block for absolute children
 }
 .header-right {
   display: flex;
@@ -2489,9 +2490,9 @@ textarea:focus {
     background: none;
     border: none;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     position: absolute;
-    right: 0;
+    right: 80px;      // adjust as needed
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
