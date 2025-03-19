@@ -1,40 +1,45 @@
 # 6001CEM Project - Student Dashboard Prototype
 
 ## Project Overview
-This repository contains a **prototype** for the **6001CEM Individual Project** by **Taha Amir Khan** (Student ID: **11651879**). The project is designed as a **Student Dashboard** for Coventry University, integrating interactive UI elements, notifications, and a timetable.
+This repository contains a prototype for the 6001CEM Individual Project by Taha Amir Khan (Student ID: 11651879). The project is designed as a Student Dashboard for Coventry University, integrating interactive UI elements such as modals, notifications, charts, a dynamic timetable, and document request functionality.
 
 ## Repository Contents
-- `index.html` - Main HTML structure for the student dashboard
-- `styles.css` - CSS styles for layout and UI design
-- `script.js` - JavaScript for interactive elements and modals
-- `coventry-logo.png` - Coventry University logo used in the header
-- `aula-logo.jpeg` - Aula logo used in the coursework section
+- index.html – Main HTML structure for the student dashboard.
+- styles.css – CSS styles for layout, responsive design, and UI components.
+- script.js – JavaScript handling modals, pop-ups, charts (via Chart.js), notifications, and other interactive features.
+- coventry-logo.png – Coventry University logo used in the header.
+- aula-logo.jpeg – Aula logo used in the coursework section.
 
 ## Features
-- **Student Dashboard Interface**: Provides a centralized student portal experience.
-- **Interactive Notifications**: Displays alerts for coursework deadlines, exam registration, and more.
-- **Timetable Integration**: Weekly schedule layout for student classes.
-- **Document Requests**: Ability to generate student-related documents.
-- **Grade Overview**: Displays recent grades and overall academic progress.
+- Student Dashboard Interface: A centralized portal with a modern, responsive design.
+- Interactive Notifications: Real-time alerts via modals with clickable actions.
+- Dynamic Timetable: Weekly schedule with room updates and class information.
+- Document Requests: Generate and download student-related documents.
+- Grade Overview: Interactive grade tables and academic progress visualization using doughnut charts.
+- Support Services: Access extensive student support information.
 
-## Deployment
-This prototype is hosted via **GitHub Pages** for demonstration purposes. Ensure that all assets are correctly linked when hosting locally or deploying to a different environment.
+## Technologies Used
+- HTML5, CSS3, JavaScript.
+- Chart.js for charting and data visualization.
+- Font Awesome for icons.
+- Responsive design with media queries for mobile compatibility.
 
-## Usage Instructions
+## Deployment Instructions
 1. Clone the repository:
    ```sh
    git clone https://github.com/your-github-username/repository-name.git
    ```
-2. Open `index.html` in a browser to view the prototype.
-3. Modify `styles.css` or `script.js` as needed to customize the dashboard functionality.
+2. Open `index.html` in a web browser to launch the prototype.
+3. Modify `styles.css` and `script.js` as needed for customization.
 
 ## Future Improvements
-- Implement backend integration for real-time student data retrieval.
-- Enhance UI/UX for better accessibility and responsiveness.
-- Expand notification features to include real-time push updates.
+- Integrate a backend for real-time data and user authentication.
+- Enhance accessibility and compliance with WCAG guidelines.
+- Expand interactive features and modularize the JavaScript code for maintainability.
+- Add real-time push notifications and advanced data analytics.
 
 ## Author
-**Taha Amir Khan**  
-**Coventry University**  
-**6001CEM - Individual Project**
+Taha Amir Khan  
+Coventry University  
+6001CEM - Individual Project
 
