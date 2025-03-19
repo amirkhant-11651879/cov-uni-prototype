@@ -2491,10 +2491,8 @@ textarea:focus {
     border: none;
     color: #fff;
     font-size: 1.1rem;
-    position: absolute;
-    right: 80px;      // adjust as needed
-    top: 50%;
-    transform: translateY(-50%);
+    position: static; /* ensure it flows inline */
+    margin-right: 15px; /* add spacing if needed */
     cursor: pointer;
     z-index: 10000; /* ensure the menu appears above header text */
   }
